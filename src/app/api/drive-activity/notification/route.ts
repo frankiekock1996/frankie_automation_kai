@@ -21,13 +21,13 @@ export async function POST(req: NextRequest) {
       where: {
         googleResourceId: channelResourceId,
       },
-      select: { clerkId: true , credits: true 
+      select: { id: true , credits: true 
     },
     })
     if ((user && parseInt(user.credits!) > 0) || user?.credits == 'Unlimited') {
       const workflow = await db.workflows.findMany({
         where: {
-          userId: user.clerkId,
+          userId: user.id,
         },
       })
       if (workflow) {
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
 
          await db.user.update({
             where: {
-              clerkId: user.clerkId,
+              id: user.id,
             },
             data: {
               credits: `${parseInt(user.credits!) - 1}`,

@@ -8,7 +8,7 @@ export const getGoogleListener = async () => {
   if (userId) {
     const listener = await db.user.findUnique({
       where: {
-        clerkId: userId
+        id: userId
       },
       select: {
         googleResourceId: true

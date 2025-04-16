@@ -56,7 +56,7 @@ export async function GET() {
     //if listener created store its channel id in db
     const channelStored = await db.user.updateMany({
       where: {
-        clerkId: userId,
+        id: userId,
       },
       data: {
         googleResourceId: listener.data.resourceId,

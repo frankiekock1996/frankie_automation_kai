@@ -10,14 +10,14 @@ export async function POST(req: Request) {
     console.log('✅', body)
 
     await db.user.upsert({
-      where: { clerkId: id },
+      where: { id: id },
       update: {
         email,
         name: first_name,
         profileImage: image_url,
       },
       create: {
-        clerkId: id,
+        id: id,
         email,
         name: first_name || '',
         profileImage: image_url || '',

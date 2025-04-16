@@ -2,6 +2,7 @@
 import { EditorCanvasCardType, EditorNodeType } from '@/lib/types'
 import { useEditor } from '@/providers/editor-provider'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import '../../turbo-editor.css';
 import ReactFlow, {
   Background,
   Connection,

@@ -32,6 +32,7 @@ const EditorCanvasCardSingle = ({ data }: { data: EditorCanvasCardType }) => {
           style={{ zIndex: 100 }}
         />
       )}
+      <div className="gradient-border relative">
       <Card
         onClick={(e) => {
           e.stopPropagation()
@@ -73,6 +74,7 @@ const EditorCanvasCardSingle = ({ data }: { data: EditorCanvasCardType }) => {
           })}
         ></div>
       </Card>
+      </div>
       <CustomHandle
         type="source"
         position={Position.Bottom}

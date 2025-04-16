@@ -6,6 +6,7 @@ import { onDiscordConnect } from './_actions/discord-connection'
 import { onNotionConnect } from './_actions/notion-connection'
 import { onSlackConnect } from './_actions/slack-connection'
 import { getUserData } from './_actions/get-user'
+import { auth } from '@/lib/auth';
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -51,7 +52,7 @@ const Connections = async (props: Props) => {
     team_id: '',
     team_name: '',
   }
-  const {data:session} = useSession()
+  const session = await auth()
   const user =session?.user
   if (!user) return null
 
