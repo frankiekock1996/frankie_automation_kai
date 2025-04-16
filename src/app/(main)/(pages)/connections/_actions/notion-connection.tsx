@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/lib/db'
-import { currentUser } from '@clerk/nextjs'
+import { useSession } from "next-auth/react";
 import { Client } from '@notionhq/client'
 
 // Import statements
@@ -52,7 +52,8 @@ export const onNotionConnect = async (
 }
 
 export const getNotionConnection = async () => {
-  const user = await currentUser()
+  const {data:session} = useSession()
+  const user =session?.user
   if (user) {
     const connection = await db.notion.findFirst({
       where: {

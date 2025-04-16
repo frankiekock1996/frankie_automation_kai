@@ -1,7 +1,7 @@
 import { CONNECTIONS } from '@/lib/constant'
 import React from 'react'
 import ConnectionCard from './_components/connection-card'
-import { currentUser } from '@clerk/nextjs'
+import { useSession } from "next-auth/react";
 import { onDiscordConnect } from './_actions/discord-connection'
 import { onNotionConnect } from './_actions/notion-connection'
 import { onSlackConnect } from './_actions/slack-connection'
@@ -51,8 +51,8 @@ const Connections = async (props: Props) => {
     team_id: '',
     team_name: '',
   }
-
-  const user = await currentUser()
+  const {data:session} = useSession()
+  const user =session?.user
   if (!user) return null
 
   const onUserConnections = async () => {

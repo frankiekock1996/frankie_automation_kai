@@ -1,6 +1,6 @@
 import ProfileForm from '@/components/forms/profile-form'
 import { db } from '@/lib/db'
-import { currentUser } from '@clerk/nextjs'
+import { useSession } from "next-auth/react";
 import React from 'react'
 import ProfilePicture from './_components/profile-picture'
 

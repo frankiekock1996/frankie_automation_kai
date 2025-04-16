@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/lib/db'
-import { currentUser } from '@clerk/nextjs'
+import { useSession } from "next-auth/react";
 import axios from 'axios'
 
 export const onDiscordConnect = async (
@@ -92,7 +92,8 @@ export const onDiscordConnect = async (
 }
 
 export const getDiscordConnectionUrl = async () => {
-  const user = await currentUser()
+  const {data:session} = useSession()
+  const user =session?.user
   if (user) {
     const webhook = await db.discordWebhook.findFirst({
       where: {
