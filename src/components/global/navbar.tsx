@@ -2,11 +2,13 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuIcon } from "lucide-react";
-import { NavBody, NavItems, ResizableNavbar } from "../ui/resizable-navbar.tsx";
+import { NavBody, NavItems, ResizableNavbar } from "../ui/resizable-navbar";
 import { cn } from "@/lib/utils";
+import { auth } from "@/lib/auth";
 
-const Navbar = () => {
-  const userId = "1";
+const Navbar = async () => {
+  const session = await auth();
+  const userId = session?.user?.id;
   const navItems = [
     { name: "Products", link: "#" },
     { name: "Resources", link: "#" },
@@ -44,7 +46,7 @@ const Navbar = () => {
         {/* Right Side - Auth */}
         <aside className="flex items-center gap-4">
           <Link
-            href={userId ? "/dashboard" : "/sign-in"}
+            href={userId ? "/dashboard" : "/api/auth/signin"}
             className="relative inline-flex h-10 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
           >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
@@ -52,7 +54,6 @@ const Navbar = () => {
               {userId ? "Dashboard" : "Get Started"}
             </span>
           </Link>
-          <div>UserButton</div>
           <MenuIcon className="md:hidden text-white" />
         </aside>
       </NavBody>
