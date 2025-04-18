@@ -14,13 +14,13 @@ export async function POST(req: Request) {
       update: {
         email,
         name: first_name,
-        profileImage: image_url,
+        image: image_url,
       },
       create: {
         id: id,
         email,
         name: first_name || '',
-        profileImage: image_url || '',
+        image: image_url || '',
       },
     })
     return new NextResponse('User updated in database successfully', {
