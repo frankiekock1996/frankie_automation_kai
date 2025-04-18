@@ -113,7 +113,7 @@ const TaskForm: FC<{
                     recharge the batteries a little."
                     className="mb-6"
                 />
-                <MultiValueInput
+                {/* <MultiValueInput
                     id="subtasks"
                     placeholder="e.g. To Do"
                     label="Subtasks"
@@ -123,7 +123,7 @@ const TaskForm: FC<{
                     validationHandler={validateTitle}
                     addBtnText="+ Add New Subtask"
                     fieldType="textarea"
-                />
+                /> */}
                 {dropdownOptions && (
                     <Dropdown
                         setValue={columnDropdown.setValue}

@@ -160,7 +160,20 @@ export const onCreateWorkflow = async (name: string, description: string) => {
         description
       }
     });
-
+    // create kanban
+     
+    const kanban = await db.board.create({
+      data: {
+        name: name,
+        uuid: workflow.id,
+        user: {
+          connect: {
+            id: user.id
+          }
+        },
+        columns: {}
+      }
+    });
     if (workflow) return { message: "workflow created" };
     return { message: "Oops! try again" };
   }

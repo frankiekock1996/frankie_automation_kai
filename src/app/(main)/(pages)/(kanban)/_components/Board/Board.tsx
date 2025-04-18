@@ -24,7 +24,9 @@ import BoardForm from "../Modals/BoardForm";
 import useModal from "@/hooks/useModal";
 import { PopoverLink } from "../Popover/Popover";
 import usePopover from "@/hooks/usePopover";
-
+import TaskForm from "../Modals/TaskForm";
+import TaskDetails from "../Modals/TaskDetails";
+import Link from "next/link";
 const validateColumn = (value: string): [boolean, string] => {
   if (!value || value.trim().length < 1) return [false, "Can't be empty"];
   if (value.trim().length > 20) return [false, `${value.trim().length}/20`];
@@ -106,14 +108,24 @@ const Board: FC<{ boardUUID: string }> = (props) => {
     fetcher,
     {}
   );
+  const [selectedTask, setSelectedTask] = useState<any | null>(null);
+  const sortedColumns = boardData.data?.columns.sort(
+    (a, b) => a.position - b.position
+  );
   const editBoardModal = useModal();
   const EditBoardModal = editBoardModal.Component;
+  const newTaskModal = useModal();
+  const NewTaskModal = newTaskModal.Component;
+  const editTaskModal = useModal();
+  const EditTaskModal = editTaskModal.Component;
   const [items, setItems] = useState<Columns>({});
   const [clonedItems, setClonedItems] = useState<Columns | null>(items);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [draggedTask, setDraggedTask] = useState<Task | null>(null);
   const { Component: Popover, ...optionsPopover } = usePopover();
-
+  const handleNewTask = () => {
+    newTaskModal.toggle();
+  };
   useEffect(() => {
     const newValue: Columns = {};
     if (!boardData.data) return;
@@ -304,12 +316,20 @@ const Board: FC<{ boardUUID: string }> = (props) => {
     editBoardModal.close();
     boardData.mutate();
   };
+  function handleEditTask(task: any) {
+    setSelectedTask(task);
+    editTaskModal.open();
+  }
   return (
     <div className="flex flex-col relative h-full">
       <h1 className="text-4xl sticky top-0 z-[10] p-6 bg-background/50 backdrop-blur-lg flex items-center border-b justify-between">
-        KanBan
+        {boardData.data?.name}
         <div className=" flex gap-6">
-          <PopoverLink onClick={handleEditBoard} id="board-edit">
+          <PopoverLink onClick={() => {}} id="board-edit">
+            <Link href={`/workflows/editor/${props.boardUUID}`}>Editor</Link>
+          </PopoverLink>
+
+          <PopoverLink onClick={handleNewTask} id="board-edit">
             Add Task
           </PopoverLink>
           <PopoverLink onClick={handleEditBoard} id="board-edit">
@@ -336,7 +356,12 @@ const Board: FC<{ boardUUID: string }> = (props) => {
                 .sort(([_col, a], [_col2, b]) => a.position - b.position)
                 .map(([colName, colData]) => {
                   return (
-                    <Column key={colName} name={colName} columnData={colData} />
+                    <Column
+                      key={colName}
+                      name={colName}
+                      columnData={colData}
+                      onTaskClick={handleEditTask}
+                    />
                   );
                 })}
             {boardData.data && (
@@ -355,6 +380,23 @@ const Board: FC<{ boardUUID: string }> = (props) => {
           onBoardUpdated={handleBoardUpdate}
         />
       </EditBoardModal>
+      <NewTaskModal>
+        <TaskForm
+          formType="new"
+          closeModal={newTaskModal.close}
+          columns={sortedColumns}
+        />
+      </NewTaskModal>
+      <EditTaskModal>
+        {boardData.data && selectedTask && (
+          <TaskDetails
+            closeModal={editTaskModal.close}
+            taskUUID={selectedTask.uuid!}
+            columns={boardData.data.columns}
+            board={boardData}
+          />
+        )}
+      </EditTaskModal>
     </div>
   );
 };

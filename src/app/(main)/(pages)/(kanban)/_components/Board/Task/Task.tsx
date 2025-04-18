@@ -1,22 +1,22 @@
 import { FC } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { Task as TaskT } from '@/types';
-import { useBoardsContext } from '@/store/BoardListContext';
 
-const Task: FC<{ taskData: TaskT }> = ({ taskData }) => {
+
+const Task: FC<{ taskData: TaskT, onTaskClick: (task: TaskT) => void }> = ({ taskData, onTaskClick }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: taskData.uuid });
-    const { setSelectedTask } = useBoardsContext();
     const style = transform
         ? {
-              transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-              transition,
-          }
+            transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+            transition,
+        }
         : undefined;
 
     const completedTasks = taskData.subtasks.filter((subtask) => subtask.completed).length;
 
     const handleTaskClick = () => {
-        setSelectedTask(taskData.uuid);
+        onTaskClick(taskData);
+        // setSelectedTask(taskData.uuid);
     };
 
     return (
