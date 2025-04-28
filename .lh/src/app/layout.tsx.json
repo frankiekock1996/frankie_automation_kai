@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745567126288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745567126288,
+            "name": "Commit-0",
+            "content": "import type { Metadata } from \"next\";\r\nimport { DM_Sans } from \"next/font/google\";\r\nimport \"./globals.css\";\r\nimport { ThemeProvider } from \"@/providers/theme-providers\";\r\nimport ModalProvider from \"@/providers/modal-providers\";\r\nimport { Toaster } from \"@/components/ui/sonner\";\r\nimport { BillingProvider } from \"@/providers/billing-provider\";\r\nconst font = DM_Sans({ subsets: [\"latin\"] });\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"App.\",\r\n  description: \"Automate Your Work With App.\"\r\n};\r\n\r\nexport default async function RootLayout({\r\n  children\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return (\r\n    <html lang=\"en\" suppressHydrationWarning>\r\n      <body className={font.className}>\r\n          <ThemeProvider\r\n            attribute=\"class\"\r\n            defaultTheme=\"dark\"\r\n            enableSystem\r\n            disableTransitionOnChange\r\n          >\r\n            <BillingProvider>\r\n              <ModalProvider>\r\n                {children}\r\n                <Toaster />\r\n              </ModalProvider>\r\n            </BillingProvider>\r\n          </ThemeProvider>\r\n      </body>\r\n    </html>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

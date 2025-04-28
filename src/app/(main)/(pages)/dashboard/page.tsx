@@ -1,6 +1,9 @@
 import React from 'react'
 import DashboardCard from './DashboardCard'
 import { Folder, MessageCircle, Newspaper, User, FolderX, FolderCheck } from 'lucide-react';
+import PostsTable from '../../../../components/posts/PostsTable';
+import AnalyticsChart from './AnalyticsChart';
+import PostsPagination from '../../../../components/posts/PostsPagination';
 
 export default function Home() {
   return (
@@ -27,8 +30,9 @@ export default function Home() {
           icon={<FolderX className='text-slate-500' size={72} />}
         />
       </div>
-      {/* <AnalyticsChart />
-      <PostsTable title='Latest Posts' limit={5} /> */}
+      <AnalyticsChart />
+      <PostsTable title='Latest Posts' limit={15} />
+      <PostsPagination/>
     </>
   );
 }

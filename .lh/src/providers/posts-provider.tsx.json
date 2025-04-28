@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/providers/posts-provider.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745768415467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745768415467,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nimport React, { createContext, useContext, useState } from 'react';\r\n\r\ninterface Post {\r\n  id: string;\r\n  title: string;\r\n  body: string;\r\n  author: string;\r\n  date: string;\r\n}\r\n\r\ninterface PostsContextType {\r\n  posts: Post[];\r\n  updatePost: (id: string, updatedPost: Post) => void;\r\n}\r\n\r\nconst PostsContext = createContext<PostsContextType | undefined>(undefined);\r\n\r\nexport const PostsProvider = ({ children }: { children: React.ReactNode }) => {\r\n  const [posts, setPosts] = useState<Post[]>([]);\r\n\r\n  const updatePost = (id: string, updatedPost: Post) => {\r\n    setPosts((prevPosts) =>\r\n      prevPosts.map((post) => (post.id === id ? updatedPost : post))\r\n    );\r\n  };\r\n\r\n  return (\r\n    <PostsContext.Provider value={{ posts, updatePost }}>\r\n      {children}\r\n    </PostsContext.Provider>\r\n  );\r\n};\r\n\r\nexport const usePostsContext = () => {\r\n  const context = useContext(PostsContext);\r\n  if (!context) {\r\n    throw new Error('usePostsContext must be used within a PostsProvider');\r\n  }\r\n  return context;\r\n};\r\n"
+        }
+    ]
+}

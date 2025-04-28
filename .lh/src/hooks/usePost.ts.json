@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/hooks/usePost.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1745758624407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745759663886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+import { useState } from 'react';\r\n+import { Post } from '@/types/posts';\r\n+import postsData from '@/data/posts'; // <-- import the static posts\r\n+\r\n+const usePosts = () => {\r\n+  const [posts, setPosts] = useState<Post[]>(postsData); // <-- now correct\r\n+\r\n+  const updatePost = (id: string, newData: Post) => {\r\n+    setPosts(prev =>\r\n+      prev.map(post =>\r\n+        post.id === id ? { ...post, ...newData } : post\r\n+      )\r\n+    );\r\n+  };\r\n+\r\n+  return { posts, updatePost };\r\n+};\r\n+\r\n+export default usePosts;\r\n"
+                },
+                {
+                    "date": 1745759671145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+import { useState } from 'react';\r\n+import { Post } from '@/types/posts';\r\n+import postsData from '@/data/posts'; \r\n+\r\n+const usePosts = () => {\r\n+  const [posts, setPosts] = useState<Post[]>(postsData); \r\n+\r\n+  const updatePost = (id: string, newData: Post) => {\r\n+    setPosts(prev =>\r\n+      prev.map(post =>\r\n+        post.id === id ? { ...post, ...newData } : post\r\n+      )\r\n+    );\r\n+  };\r\n+\r\n+  return { posts, updatePost };\r\n+};\r\n+\r\n+export default usePosts;\r\n"
+                }
+            ],
+            "date": 1745758624407,
+            "name": "Commit-0",
+            "content": "import { useState } from 'react';\r\nimport { Post } from '@/types/posts'; \r\n\r\nconst usePosts = () => {\r\n  const [posts, setPosts] = useState<Post[]>(initialPosts);\r\n\r\n  const updatePost = (id: string, newData: Post) => {\r\n    setPosts(prev =>\r\n      prev.map(post =>\r\n        post.id === id ? { ...post, ...newData } : post\r\n      )\r\n    );\r\n  };\r\n\r\n  return { posts, updatePost };\r\n};\r\n\r\nexport default usePosts;\r\n"
+        }
+    ]
+}

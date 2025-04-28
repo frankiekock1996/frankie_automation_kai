@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['framer-motion'],
   images: {
     remotePatterns: [
       {
@@ -8,6 +9,9 @@ const nextConfig = {
       }
     ],
   },
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma']
+  }
 };
-// https://lh3.googleusercontent.com/a/ACg8ocIlxn4mqgEje-4D9bciH-piuW_pSJQK6Q_qaR3MrkAAaQT_eyc=s96-c
+
 export default nextConfig;

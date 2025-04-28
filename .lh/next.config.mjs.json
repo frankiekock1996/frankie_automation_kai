@@ -1,0 +1,22 @@
+{
+    "sourceFile": "next.config.mjs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745587458633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745590813013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,10 @@\n         hostname: '**.googleusercontent.com',\r\n       }\r\n     ],\r\n   },\r\n+  experimental: {\r\n+    serverComponentsExternalPackages: ['@prisma/client', 'prisma']\r\n+  }\r\n };\r\n-// https://lh3.googleusercontent.com/a/ACg8ocIlxn4mqgEje-4D9bciH-piuW_pSJQK6Q_qaR3MrkAAaQT_eyc=s96-c\r\n+\r\n export default nextConfig;\r\n"
+                }
+            ],
+            "date": 1745587458633,
+            "name": "Commit-0",
+            "content": "/** @type {import('next').NextConfig} */\r\nconst nextConfig = {\r\n  transpilePackages: ['framer-motion'],\r\n  images: {\r\n    remotePatterns: [\r\n      {\r\n        protocol: 'https',\r\n        hostname: '**.googleusercontent.com',\r\n      }\r\n    ],\r\n  },\r\n};\r\n// https://lh3.googleusercontent.com/a/ACg8ocIlxn4mqgEje-4D9bciH-piuW_pSJQK6Q_qaR3MrkAAaQT_eyc=s96-c\r\nexport default nextConfig;\r\n"
+        }
+    ]
+}

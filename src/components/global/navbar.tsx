@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import { MenuIcon } from "lucide-react";
@@ -7,43 +7,27 @@ import { cn } from "@/lib/utils";
 import { auth } from "@/lib/auth";
 
 const Navbar = async () => {
-  const session = await auth();
+  const session = await auth(); // safe now
   const userId = session?.user?.id;
+
   const navItems = [
     { name: "Products", link: "#" },
     { name: "Resources", link: "#" },
     { name: "Documentation", link: "#" },
-    { name: "Playground", link: "#" }
+    { name: "Playground", link: "#" },
   ];
 
   return (
     <ResizableNavbar className="fixed top-0">
-      <NavBody
-        className={cn(
-          "bg-black/40 backdrop-blur-lg border-b-[1px] border-neutral-900 py-4 px-4 z-[100]",
-          "dark:bg-neutral-950/80"
-        )}
-      >
-        {/* Left Side - Logo */}
+      <NavBody className={cn("bg-black/40 backdrop-blur-lg border-b-[1px] border-neutral-900 py-4 px-4 z-[100]", "dark:bg-neutral-950/80")}>
         <aside className="flex items-center gap-[2px]">
           <p className="text-3xl font-bold">A</p>
-          <Image
-            src="/fuzzieLogo.png"
-            width={15}
-            height={15}
-            alt="DELL logo"
-            className="shadow-sm"
-          />
+          <Image src="/fuzzieLogo.png" width={15} height={15} alt="DELL logo" className="shadow-sm" />
           <p className="text-3xl font-bold">PP</p>
         </aside>
 
-        {/* Center Navigation */}
-        <NavItems
-          items={navItems}
-          className="text-neutral-300 hover:text-white"
-        />
+        <NavItems items={navItems} className="text-neutral-300 hover:text-white" />
 
-        {/* Right Side - Auth */}
         <aside className="flex items-center gap-4">
           <Link
             href={userId ? "/dashboard" : "/api/auth/signin"}
